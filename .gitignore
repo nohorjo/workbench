@@ -1,0 +1,12 @@
+Session.vim
+*.swp
+.fuse*
+stl/*
+*.3mf
+*.scad
+__pycache__/
+*.isdep
+*.dep
+
+venv/
+*.orig
