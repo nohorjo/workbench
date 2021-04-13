@@ -5,7 +5,7 @@ python3 << EOF
 import os
 import re
 
-filename = os.path.normpath(vim.eval("bufname('%')"))
+filename = os.path.normpath(vim.eval("expand('%:t')"))
 importPattern = re.compile("^from \w+ import")
 
 os.system("python3 " + filename)
@@ -42,10 +42,12 @@ function! NewPython()
     call append(i, "from solid.utils import *") | let i = i + 1
     call append(i, "") | let i = i + 1
     call append(i, "from constants import *") | let i = i + 1
+    call append(i, "from moveable_point import *") | let i = i + 1
+    call append(i, "from super_hole import *") | let i = i + 1
     call append(i, "") | let i = i + 1
     call append(i, "if __name__ == '__main__':") | let i = i + 1
     call append(i, "    model = None") | let i = i + 1
-    call append(i, "    scad_render_to_file(model, '_%s.scad'% __file__[:-3])") | let i = i + 1
+    call append(i, "    scad_render_to_file(model, '_%s.scad'% __file__.split('/')[-1][:-3])") | let i = i + 1
     execute i - 1
 endfunction
 

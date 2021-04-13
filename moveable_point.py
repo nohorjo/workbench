@@ -1,4 +1,5 @@
 import math
+import re
 
 class MoveablePoint:
     def __init__(self, x: float = 0, y: float = 0):
@@ -47,3 +48,34 @@ class MoveablePoint:
         self.y += v * math.sin(math.radians(self.angle))
         return self
 
+def points(str):
+    p = MoveablePoint()
+    r = [p.val()]
+
+    for l in str.split():
+        for m in re.findall("\D\d*", l):
+            c = m[0]
+            v = float(m[1:])
+            if c == 'u':
+                p.up(v)
+            elif c == 'd':
+                p.down(v)
+            elif c == 'l':
+                p.left(v)
+            elif c == 'r':
+                p.right(v)
+            elif c == 'f':
+                p.forward(v)
+            elif c == 'a':
+                p.rotate(v)
+            elif c == 'X':
+                p.set(x = v)
+            elif c == 'Y':
+                p.set(y = v)
+            elif c == 'A':
+                p.set(angle = v)
+            elif c == 'R':
+                p.reset()
+        r.append(p.val())
+
+    return r

@@ -1,11 +1,10 @@
 import inspect
 
 from solid import *
-from solid.utils import *
 
-def super_hole(model, name, debug = False):
-    if debug:
-        return solid.debug(model)
+def super_hole(model, name, _debug = False):
+    if _debug:
+        return debug(model)
     fnpart = inspect.stack()[1].filename[:-3].split('/')[-1]
     fn = '.%s_%s.scad'% (fnpart, name)
     content = """
