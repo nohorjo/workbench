@@ -35,20 +35,13 @@ def randc():
     ]
     return lambda model : color(colours, 0.7)(model)
 
-def _bom_wrap(model, name, perM, length):
-    @bom_part(name + " " + str(length), perM * length / 1000, "£")
-    def wrap():
-        return model
-
-    return wrap()
-
 timber_used = {
     "2x4":[],
     "2x6":[],
     "2x10":[],
 }
 
-def _timber(x, y, length, name, price):
+def _timber(x, y, length, name):
     model = color('#EED5AE')(cube([x, y, length]))
 
     t = 4
@@ -69,27 +62,27 @@ def _timber(x, y, length, name, price):
 
     max_length = 4800 if name == "2x10" else 2400
     if length > max_length:
-        model = _timber(x, y, max_length, name, price)
-        model += up(max_length)(_timber(x, y, length - max_length, name, price))
+        model = _timber(x, y, max_length, name)
+        model += up(max_length)(_timber(x, y, length - max_length, name))
     else:
         if name in timber_used:
             timber_used[name].append(length)
         else:
             timber_used[name] = [length]
 
-    return _bom_wrap(model, name, price, length)
+    return model
 
 def timber(x, y, length):
-    return _timber(x, y, length, f"timber ({x} x {y} x {length})",  0)
+    return _timber(x, y, length, f"timber ({x} x {y} x {length})")
 
 def x2x4(length):
-    return _timber(ACT2, ACT4, length, "2x4", 2.91)
+    return _timber(ACT2, ACT4, length, "2x4")
 
 def x2x6(length):
-    return _timber(ACT2_LONG, ACT6, length, "2x6", 4.99)
+    return _timber(ACT2_LONG, ACT6, length, "2x6")
 
 def x2x10(length):
-    return _timber(ACT2_LONG, ACT10, length, "2x10", 7.5)
+    return _timber(ACT2_LONG, ACT10, length, "2x10")
 
 def x4x4(length):
-    return _timber(ACT4, ACT4, length, "4x4", 5.2)
+    return _timber(ACT4, ACT4, length, "4x4")
