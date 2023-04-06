@@ -5,6 +5,18 @@ from solid.utils import *
 from constants import *
 from super_hole import *
 
+def support():
+  model = x2x6((total_width - (0 * ACT2_LONG)))
+  model = rotate(90, FORWARD_VEC)(model)
+  model = rotate(90, UP_VEC)(model)
+  model = translate([
+    ACT2_LONG + ACT6,
+    0,
+    (total_length + ACT2_LONG) / 2
+  ])(model)
+
+  return model
+
 def worktop():
   model = x2x10(total_length)
   model += forward(ACT10)(x2x6(total_length))
@@ -15,19 +27,10 @@ def worktop():
     )
   )
 
-  support = x2x6((total_width - (0 * ACT2_LONG)))
-  support = rotate(90, FORWARD_VEC)(support)
-  support = rotate(90, UP_VEC)(support)
-  support = translate([
-    ACT2_LONG + ACT6,
-    0,
-    (total_length + ACT2_LONG) / 2
-  ])(support)
-
   support_offset = FT
-  supports = support
-  supports += up(FT)(support)
-  supports += down(FT)(support)
+  supports = support()
+  supports += up(FT)(support())
+  supports += down(FT)(support())
 
   model += supports
 
