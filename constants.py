@@ -12,7 +12,7 @@ IN = 25.4
 FT = 300.0
 
 tool_well_width = ACT4 * 2
-tool_well_shelf_thickness = 3
+tool_well_shelf_thickness = 3.6
 
 total_height = 30*IN
 total_length = 6*FT
@@ -21,7 +21,7 @@ total_width = ACT10 + ACT6 + ACT2_LONG + tool_well_width
 leg_height = total_height - ACT2_LONG
 leg_width = 2 * ACT2
 
-trestles_inset = 8*IN
+trestles_inset = 12*IN
 trestle_stretcher_offset = 11*IN
 
 strecher_length = total_length - (trestles_inset * 2) + 5.5*IN
@@ -73,7 +73,7 @@ def _timber(x, y, length, name):
     return model
 
 def timber(x, y, length):
-    return _timber(x, y, length, f"timber ({x} x {y} x {length})")
+    return _timber(x, y, length, f"timber ({x} x {y})")
 
 def x2x4(length):
     return _timber(ACT2, ACT4, length, "2x4")

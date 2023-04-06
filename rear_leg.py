@@ -6,7 +6,7 @@ from super_hole import *
 
 def rear_leg():
   model = x2x4(leg_height)
-  model += right(ACT2)(model)
+  model += right(ACT2)(x2x4(leg_height - ACT2))
 
   return model
 

@@ -64,7 +64,30 @@ update_deps(sys.argv[1], [])
 endef
 export UPDATE
 
-.PHONY: all clean scad watch
+define NEW_MODULE
+read -p "Enter module name: " mn
+echo "
+from solid import *
+from solid.utils import *
+
+from constants import *
+from super_hole import *
+
+def $$mn():
+  model = cube([1, 2, 3])
+
+  return model
+
+if __name__ == '__main__':
+  model = $$mn()
+
+  scad_render_to_file(model, '_%s.scad'% __file__.split('/')[-1][:-3])
+
+" > $$mn.py
+endef
+export NEW_MODULE
+
+.PHONY: all clean new scad watch
 
 all: $(patsubst %.py,stl/%.stl,$(SOURCES))
 
@@ -84,6 +107,9 @@ stl/%.stl: _%.scad
 
 clean:
 	rm stl/* *.scad .*.scad .*.dep .*.isdep
+
+new:
+	bash -c "$$NEW_MODULE"
 
 watch:
 	inotifywait -m --format '%w' -e close_write ./*.py | while read FILE; \

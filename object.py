@@ -46,13 +46,16 @@ if __name__ == '__main__':
     max_length = 4800 if name == "2x10" else 2400
     print(total , ceil(total / max_length), max_length - int(total % max_length))
     for timber in timber_used[name]:
-      l = int(timber / 100)
-      print(f">{'=' * l}{' ' * (24 - l)}<")
+      l = ceil(timber / 100)
+      remainder = (24 - l)
+      remainder_string = str(remainder * 100)
+      print(f">{'=' * l}{' ' * (remainder - len(remainder_string))}{remainder_string}<")
   print('*******************************')
 
   print({
     "length": round(total_length / FT, 2),
     "width": round(total_width / IN, 2),
     "height": round(total_height / IN, 2),
+    "trestles gap": round(strecher_length / IN, 2),
   })
 
