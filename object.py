@@ -1,5 +1,6 @@
 from solid import *
 from solid.utils import *
+import binpacking
 
 from constants import *
 from super_hole import *
@@ -42,14 +43,11 @@ if __name__ == '__main__':
     timber_used[name].sort()
     total = ceil(sum(timber_used[name]))
     lengths = map(lambda x: str(int(x)), timber_used[name])
-    print(f'{name}: {"	".join(lengths)}')
-    max_length = 4800 if name == "2x10" else 2400
-    print(total , ceil(total / max_length), max_length - int(total % max_length))
-    for timber in timber_used[name]:
-      l = ceil(timber / 100)
-      remainder = (24 - l)
-      remainder_string = str(remainder * 100)
-      print(f">{'=' * l}{' ' * (remainder - len(remainder_string))}{remainder_string}<")
+    max_length = 3600 if name == "2x10" else 2400
+    planks = binpacking.to_constant_volume(timber_used[name], max_length)
+    print(f'{name}: {total} = {len(planks)}, remainder {max_length - int(total % max_length)}')
+    for plank in planks:
+      print(list(map(lambda x: str(ceil(x)), plank)))
   print('*******************************')
 
   print({
