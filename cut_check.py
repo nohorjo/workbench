@@ -24,20 +24,22 @@ def cut_check():
   gap = 100
   #2x4
   model = place([
-    1330,
+    720,
+    720,
+    680,
+  ])
+  model = left(95)(model)
+  model += place([
+    720,
+    720,
+    680,
+  ])
+  model = left(95)(model)
+  model += place([
     630,
-  ])
-  model = left(95)(model)
-  model += place([
-    720,
-    720,
-    680,
-  ])
-  model = left(95)(model)
-  model += place([
-    720,
-    720,
-    680,
+    630,
+    500,
+    500,
   ])
   model = left(95)(model)
   model = right(gap * 3)(model)
@@ -61,9 +63,7 @@ def cut_check():
   ])
   model = left(95)(model)
   model += place([
-    630, # rip 2x4
-    500, # rip 2x4
-    500, # rip 2x4
+    1330,
   ])
   model = right(gap * 3)(model)
 

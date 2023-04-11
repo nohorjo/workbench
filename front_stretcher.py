@@ -5,7 +5,7 @@ from constants import *
 from super_hole import *
 
 def front_strecher():
-  model = x2x4(strecher_length)
+  model = x2x6(strecher_length)
 
   return model
 
