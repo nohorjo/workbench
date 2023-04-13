@@ -72,6 +72,11 @@ def _timber(x, y, length, name):
         else:
             timber_used[name] = [length]
 
+    name_text = linear_extrude(3)(text(name, 14, halign = 'center'))
+    model += translate([0, y / 2, length / 2])(rotate(90, FORWARD_VEC)(rotate(90, UP_VEC)(
+        up(x)(name_text) + rotate(180, FORWARD_VEC)(name_text)
+    )))
+
     return model
 
 def timber(x, y, length):
