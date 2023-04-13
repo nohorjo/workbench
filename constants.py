@@ -60,7 +60,9 @@ def _timber(x, y, length, name):
 
     model += frame
 
-    max_length = 4800 if name == "2x10" else 2400
+    max_length = 4800 if name == "2x10" else (
+        1200 if name.startswith('timber') else 2400
+    )
     if length > max_length:
         model = _timber(x, y, max_length, name)
         model += up(max_length)(_timber(x, y, length - max_length, name))
