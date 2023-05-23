@@ -18,8 +18,8 @@ def support():
   return model
 
 def worktop():
-  model = x2x10(total_length)
-  model += forward(ACT10)(x2x6(total_length))
+  model = x2x6(total_length)
+  model += forward(ACT6)(x2x10(total_length))
 
   model += translate([ACT2_LONG, ACT2_LONG])(
     rotate(90, DOWN_VEC)(
